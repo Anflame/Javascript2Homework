@@ -89,7 +89,29 @@
 }
 .basket {
     display: none;
+    max-width: 400px;
+    position:fixed;
+    top: 100px;
+    right: 150px;
+    background: white;
+    box-shadow: 0 0 10px #00BFFF;
+}
+.basket_item-img {
+    margin-bottom: 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    width: 30%;
+}
+.basket-item {
+    margin: 10px;
+}
+.basket_close-btn {
+    align-self: flex-start;
+    margin-right: 5px;
+    margin-top: 5px;
 }
 .show {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -20,9 +20,24 @@
         <div class="container">
             <div class="products flex-box"></div>
         </div>
-        <div class="basket"></div>
+        <div class="basket">
+            <a href="#" class="basket_close-btn"><img src="images/close.png" alt="закрыть" width="15px"
+                    height="15px"></a>
+        </div>
     </main>
     <script src="js/main.js"></script>
+    <script>
+        let buttonBasket = document.querySelector('.btn-cart');
+        buttonBasket.addEventListener('click', function () {
+            let basket = new Basket();
+            basket.render();
+        });
+        let buttonBasketClose = document.querySelector('.basket_close-btn');
+        buttonBasketClose.addEventListener('click', function () {
+            let basket = document.querySelector('.basket');
+            basket.classList.remove('show');
+        });
+    </script>
 </body>
 
 </html>

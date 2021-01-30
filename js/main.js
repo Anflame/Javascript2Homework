@@ -1,12 +1,23 @@
-class ProductList {
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/';
+class ProductsList {
     constructor(container = '.products') {
         this.container = container;
-        this.goods = [
-            { id: 1, title: 'Notebook', price: 2000 },
-            { id: 2, title: 'Mouse', price: 20 },
-            { id: 3, title: 'Keyboard', price: 200 },
-            { id: 4, title: 'Gamepad', price: 50 },
-        ];
+        this.goods = [];
+        this._getProducts()
+            .then(data => {
+                this.goods = [...data];
+                this.render();
+            });
+    }
+    _getProducts() {
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    calcSum() {
+        return this.allProducts.reduce((accum, item) => accum += item.price, 0);
     }
     render() {
         const block = document.querySelector(this.container);
@@ -19,9 +30,9 @@ class ProductList {
 
 class ProductItem {
     constructor(product, img = 'https://placehold.it/200x200') {
-        this.title = product.title;
+        this.title = product.product_name;
         this.price = product.price;
-        this.id = product.id;
+        this.id = product.id_product;
         this.img = img;
     }
     render() {
@@ -34,57 +45,53 @@ class ProductItem {
     }
 }
 class Basket {
-    constructor(productList, productListArray = []) {
-        this.productList = productList;
-        this.productListArray = productListArray;
+    constructor(basket = '.basket') {
+        this.basket = basket;
+        this.goods = [];
+        this._getProducts()
+            .then(data => {
+                this.goods = [...data.contents];
+                this.render();
+            });
     }
-    addToBasket() {
-        if (this.productListArray.length == 0) {
-            this.productListArray[0] = this.productList;
-        }
-        else {
-            this.productListArray.push(this.productList);
-        }
+    _getProducts() {
+        return fetch(`${API}/getBasket.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    addGoods() {
+
+    }
+    removeGoods() {
+
     }
     render() {
-        let basket = document.querySelector('.basket');
-        let rending = `<div id='item${id}' class="basket-item flex-column">
-            <h3 class='basket-item_header'>${product.title}</h3>
+        const blockBasket = document.querySelector(this.basket);
+        for (const product of this.goods) {
+            const productObj = new ElemBasket(product);
+            blockBasket.insertAdjacentHTML('afterbegin', productObj.render());
+            blockBasket.classList.add('show');
+        }
+    }
+}
+class ElemBasket {
+    constructor(product, img = 'https://placehold.it/50x50') {
+        this.title = product.product_name;
+        this.price = product.price;
+        this.id = product.id_product;
+        this.img = img;
+    }
+    render() {
+        return `
+            <div class="basket-item flex-column">
+            <h3 class='product-item_header'>${this.title}</h3>
             <img class='basket-item_img' src='${this.img}.jpg'>
             <p class='basket-item_price'>${this.price}$</p>
-            <button class="delete-btn">удалить</button>
+            <button class="basket_delete-btn">Удалить</button>
         </div>`;
-        basket.insertAdjacentHTML('beforeend', rending);
-    }
-    showBasket() {
-        let basket = document.querySelector('.basket');
-        basket.classList.add('show');
     }
 }
-class RemoveBasket {
-    constructor(productList, productListArray = []) {
-        this.productList = productList;
-        this.productListArray = productListArray;
-    }
-    deleteFromArray() {
-        delete this.productListArray[this.productList.id];
-    }
-    deleteRender() {
-        let basket = document.querySelector(`#item${this.productList.id}`);
-        basket.remove();
-    }
-}
-class GoodList {
-    constructor(productList) {
-        this.productList = productList;
-    }
-    productListCalc() {
-        resultPrice = '';
-        for (const array of this.productList) {
-            resultPrice += array.price;
-        }
-        return resultPrice;
-    }
-}
-let product = new ProductList;
-product.render();
+let list = new ProductsList;
+console.log(list.allProducts);
