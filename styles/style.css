@@ -95,21 +95,37 @@
     right: 150px;
     background: white;
     box-shadow: 0 0 10px #00BFFF;
+    padding: 15px;
 }
-.basket_item-img {
-    margin-bottom: 5px;
-    color: black;
-    font-weight: bold;
-    font-size: 14px;
-    width: 30%;
+.basket-item_img {
+    margin-bottom: 10px;
 }
 .basket-item {
     margin: 10px;
 }
 .basket_close-btn {
-    align-self: flex-start;
-    margin-right: 5px;
-    margin-top: 5px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.basket-item_price {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.basket_delete-btn {
+    color:white;
+    padding: 5px;
+    font-size: 11px;
+    box-shadow:0 0 10px #00BFFF;
+    background: #00BFFF;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.basket_delete-btn:hover {
+    color:white;
+    box-shadow: 0 0 10px black;
+    background: black;
 }
 .show {
     display: flex;
