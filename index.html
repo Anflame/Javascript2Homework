@@ -12,7 +12,15 @@
         <div class="container">
             <div class="flex-box">
                 <h1 class="heading">Shop</h1>
-                <button class="btn-cart" type="button">Корзина</button>
+                <div class="cart">
+                    <form action="#" class="search-form">
+                        <input type="text" class='search-field'>
+                        <button class="btn-search"></button>
+                        <i class="fas fa-search"></i>
+                    </form>
+                    <button class="btn-cart" type="button">Корзина</button>
+                    <div class="cart-block invisible"></div>
+                </div>
             </div>
         </div>
     </header>
@@ -20,24 +28,9 @@
         <div class="container">
             <div class="products flex-box"></div>
         </div>
-        <div class="basket">
-            <a href="#" class="basket_close-btn"><img src="images/close.png" alt="закрыть" width="15px"
-                    height="15px"></a>
-        </div>
     </main>
     <script src="js/main.js"></script>
-    <script>
-        let buttonBasket = document.querySelector('.btn-cart');
-        buttonBasket.addEventListener('click', function () {
-            let basket = new Basket();
-            basket.render();
-        });
-        let buttonBasketClose = document.querySelector('.basket_close-btn');
-        buttonBasketClose.addEventListener('click', function () {
-            let basket = document.querySelector('.basket');
-            basket.classList.remove('show');
-        });
-    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
 </body>
 
 </html>
