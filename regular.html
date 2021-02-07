@@ -27,10 +27,8 @@ Two: 'I'll see you next time.'
 One: 'Sure. Bye.'`;
         replace = str.replace(/\'/g, '"');
         console.log(replace);
-        replace1 = str.replace(/\:\s\'/g, ': "');
-        replace2 = replace1.replace(/\.\'/g, '."');
-        replace3 = replace2.replace(/\?\'/g, '?"');
-        console.log(replace3);
+        replace1 = str.replace(/\B'|\B'/g, '"');
+        console.log(replace1);
     </script>
 </body>
 
