@@ -8,29 +8,56 @@
 </head>
 
 <body>
-    <header class='header'>
-        <div class="container">
-            <div class="flex-box">
-                <h1 class="heading">Shop</h1>
-                <div class="cart">
-                    <form action="#" class="search-form">
-                        <input type="text" class='search-field'>
-                        <button class="btn-search"></button>
-                        <i class="fas fa-search"></i>
-                    </form>
-                    <button class="btn-cart" type="button">Корзина</button>
-                    <div class="cart-block invisible"></div>
+    <div id="app">
+        <header class='header'>
+            <div class="container">
+                <div class="flex-box">
+                    <h1 class="heading">Shop</h1>
+                    <div class="cart">
+                        <form action="#" class="search-form">
+                            <input type="text" class='search-field' v-model="filterName">
+                            <button class="btn-search"></button>
+                            <i class="fas fa-search"></i>
+                        </form>
+                        <button class="btn-cart" type="button" @click="show=!show">Корзина</button>
+                        <div class="cart-block" v-if="show">
+                            <div class="cart-item" v-for="cartProduct of allProducts">
+                                <div class="product-bio">
+                                    <img :src="imgBasket" alt="Some image">
+                                    <div class="product-desc">
+                                        <p class="product-title">{{cartProduct.product_name}}</p>
+                                        <p class="product-quantity">Quantity: {{cartProduct.quantity}}</p>
+                                        <p class="product-single-price">${{cartProduct.price}} each</p>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <p class="product-price">${{cartProduct.quantity * cartProduct.price}}</p>
+                                    <button class="del-btn" @click="removeProduct(cartProduct)">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-block  invisible" v-else="show"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="products flex-box"></div>
-        </div>
+        </header>
+        <main>
+            <div class="container">
+                <div class="products flex-box">
+                    <div class="product-item flex-column" v-for="product of products" :key="product.id_product">
+                        <h3 class='product-item_header'>{{product.product_name}}</h3>
+                        <img class='product-item_img' :src='imgCatalog' alt="some image">
+                        <p class='product-item_price'>{{product.price}} $</p>
+                        <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    </div>
+                </div>
+            </div>
+    </div>
     </main>
-    <script src="js/main.js"></script>
+    </div>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
