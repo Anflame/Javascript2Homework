@@ -14,6 +14,7 @@ const app = new Vue({
         allProducts: [],
         filterName: '',
         filtered: [],
+        noProducts: false
     },
     methods: {
         getJson(url) {
@@ -32,13 +33,8 @@ const app = new Vue({
                         if (find) {
                             find.quantity++;
                         } else {
-                            let product = {
-                                id_product: productId,
-                                price: +product.price,
-                                product_name: product.product_name,
-                                quantity: 1
-                            }
-                            this.allProducts = [product];
+                            const addProd = Object.assign({ quantity: 1 }, product);
+                            this.allProducts.push(addProd);
                         }
                     } else {
                         alert('Error');
@@ -56,30 +52,26 @@ const app = new Vue({
                         }
                         else {
                             this.allProducts.splice(this.allProducts.indexOf(find), 1);
+                            if (this.allProducts.length == 0) {
+                                this.noProducts = false;
+                            }
                         }
                     } else {
                         alert('Error');
                     }
                 })
         },
-        filter() {
-            // const regexp = new RegExp(this.filterName, 'i');
-            // this.filtered = this.allProducts.filter(element => regexp.test(element.product_name));
-            // this.products = this.filtered;
-            // // this.allProducts.forEach(el => {
-            // //     // if (!this.filtered.includes(el)) {
-            // //     //     this.allProducts.splice(this.allProducts.indexOf(el.id_product), 1);
-            // //     // } else {
-            // //     //     this.allProducts.push(el);
-            // //     // }
-            // // })
+        filterProducts(value) {
+            let regexp = new RegExp(value, 'i');
+            this.filtered = this.products.filter(element => regexp.test(element.product_name));
         }
     },
     mounted() {
         this.getJson(`${API + this.catalogUrl}`)
             .then(data => {
                 for (let el of data) {
-                    this.products.push(el);
+                    this.$data.products.push(el);
+                    this.$data.filtered.push(el);
                 }
             });
         this.getJson(`${API + this.basketUrl}`)
