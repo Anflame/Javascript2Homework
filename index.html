@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class='header'>
+            <div class="container">
+                <div class="flex-box">
+                    <h1 class="heading">Shop</h1>
+                    <div class="cart">
+                        <search></search>
+                        <button class="btn-cart" type="button" @click="show=!show">Корзина</button>
+                        <cart :cart-items='allProducts' :visibility='show' :img='imgBasket' @remove='removeProduct'>
+                        </cart>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <products ref='products' :img='imgCatalog' :products="filtered" @add-product="addProduct"></products>
+            </div>
+    </div>
+    </main>
+    </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src='js/basketComponent.js'></script>
+    <script src='js/ProductComponent.js'></script>
+    <script src='js/searchComponent.js'></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
