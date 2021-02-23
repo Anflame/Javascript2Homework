@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class='header'>
+            <div class="container">
+                <div class="flex-box">
+                    <h1 class="heading">Shop</h1>
+                    <div class="cart">
+                        <search></search>
+                        <cart ref="cart"></cart>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <error ref="error"></error>
+                <products ref='products'></products>
+            </div>
+        </main>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__text">
+                    <h3 class="footer__heading">Заинтересовался нашей командой?</h3>
+                    <p class="text_footer">Мы непрерывно осваиваем новые виды деятельности, расширяя свое присутствие на
+                        рынке. Развивая бизнес, мы не только создаем новые рабочие места — мы даем нашим сотрудникам
+                        уверенность в завтрашнем дне. Тем самым мы вносим вклад в успешное развитие России.</p>
+                </div>
+                <a href="#" class="footer__button">Напиши нам</a>
+            </div>
+
+        </div>
+        <hr class="footer__hr">
+        <div class="container">
+            <div class="footer__bottom">
+                <ul class="footer__info">
+                    <li class="footer__list">Здесь скоро появиться информация о наших соцсетях.</li>
+                    <li class="footer__list">+79999999999</li>
+                    <li class="footer__list">mail@mai.ru</li>
+                </ul>
+            </div>
+            <div class="footer__copy">
+                <p class="footer__copy-allrightreserved">2021 © Все права защищены.</p>
+            </div>
+        </div>
+    </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src='js/basketComponent.js'></script>
+    <script src='js/ProductComponent.js'></script>
+    <script src='js/searchComponent.js'></script>
+    <script src='js/ErrorComp.js'></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

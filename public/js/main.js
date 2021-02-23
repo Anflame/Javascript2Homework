@@ -1,87 +1,66 @@
-const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 const app = new Vue({
     el: '#app',
     data: {
-        catalogUrl: '/catalogData.json',
-        basketUrl: '/getBasket.json',
-        basketAddUrl: '/addToBasket.json',
-        basketDeleteUrl: '/deleteFromBasket.json',
-        products: [],
-        imgCatalog: 'https://placehold.it/200x150',
-        imgBasket: 'https://placehold.it/100x50',
         userSearch: '',
-        show: false,
-        allProducts: [],
-        filterName: '',
-        filtered: [],
-        noProducts: false
     },
     methods: {
         getJson(url) {
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
-                    console.log(error);
+                    // console.log(error)
+                    this.$refs.error.text = error;
                 })
         },
-        addProduct(product) {
-            this.getJson(`${API + this.basketAddUrl}`)
-                .then(data => {
-                    if (data.result === 1) {
-                        let productId = +product.id_product;
-                        let find = this.allProducts.find(product => product.id_product === productId);
-                        if (find) {
-                            find.quantity++;
-                        } else {
-                            const addProd = Object.assign({ quantity: 1 }, product);
-                            this.allProducts.push(addProd);
-                        }
-                    } else {
-                        alert('Error');
-                    }
+        postJson(url, data) {
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error)
+                    this.$refs.error.text = error;
                 })
         },
-        removeProduct(product) {
-            this.getJson(`${API + this.basketDeleteUrl}`)
-                .then(data => {
-                    if (data.result === 1) {
-                        let productId = +product.id_product;
-                        let find = this.allProducts.find(product => product.id_product === productId);
-                        if (find.quantity > 1) {
-                            find.quantity--;
-                        }
-                        else {
-                            this.allProducts.splice(this.allProducts.indexOf(find), 1);
-                            if (this.allProducts.length == 0) {
-                                this.noProducts = false;
-                            }
-                        }
-                    } else {
-                        alert('Error');
-                    }
+        putJson(url, data) {
+            return fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error)
+                    this.$refs.error.text = error;
                 })
         },
-        filterProducts(value) {
-            let regexp = new RegExp(value, 'i');
-            this.filtered = this.products.filter(element => regexp.test(element.product_name));
+
+        deleteJson(url) {
+            return fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error);
+                    this.$refs.error.text = error;
+                })
         }
     },
     mounted() {
-        this.getJson(`${API + this.catalogUrl}`)
-            .then(data => {
-                for (let el of data) {
-                    this.$data.products.push(el);
-                    this.$data.filtered.push(el);
-                }
-            });
-        this.getJson(`${API + this.basketUrl}`)
-            .then(data => {
-                for (let el of data.contents) {
-                    this.allProducts.push(el);
-                }
-            })
+
+
     }
-})
+
+});
 // class List {
 //     constructor(url, container, list = list2) {
 //         this.container = container;
