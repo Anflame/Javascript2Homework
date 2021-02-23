@@ -1,0 +1,38 @@
+[
+  {
+    "id_product": 1,
+    "product_name": "Ноутбук",
+    "price": 3000,
+    "img": "../../images/notebook.jpg"
+  },
+  {
+    "id_product": 2,
+    "product_name": "Геймпад",
+    "price": 500,
+    "img": "../../images/gamepad.jpg"
+  },
+  {
+    "id_product": 3,
+    "product_name": "Мышка",
+    "price": 300,
+    "img": "../../images/mouse.jpg"
+  },
+  {
+    "id_product": 5,
+    "product_name": "Наушники",
+    "price": 2500,
+    "img": "../../images/headphones.jpg"
+  },
+  {
+    "id_product": 3,
+    "product_name": "Клавиатура",
+    "price": 300,
+    "img": "../../images/keyboard.jpg"
+  },
+  {
+    "id_product": 4,
+    "product_name": "Монитор",
+    "price": 2500,
+    "img": "../../images/monitor.jpg"
+  }
+]
